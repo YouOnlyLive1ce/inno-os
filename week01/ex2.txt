@@ -1,20 +1,25 @@
-  244  history
-  245  neofetch
-  246  sudo apt install neofetch
-  247  neofetch
-  248  history
-  249  pwd
-  250  ls
-  251  cd ./week01
-  252  history > ex2.txt
-  253  cat ./ex2.txt
-  254  pwd
-  255  ..
-  256  cd ..
-  257  ls
-  258  code ./ex1.sh
-  259  mkdir DoesTAOpenIt
-  260  rmdir DoesTAOPenIt
-  261  rmdir DoesTAOpenIt
-  262  ls
-  263  history | tail -20 > ~/week01/ex2.txt
+  386  git reset HEAD~1
+  387  git reset HEAD
+  388  git clean
+  389  cd week01
+  390  ls
+  391  cd ..
+  392  ls
+  393  clear
+  394  git init
+  395  git status
+  396  git add ./week01
+  397  git status
+  398  git commit -m "hw1"
+  399  git remote add origin https://github.com/YouOnlyLive1ce/inno-os.git
+  400  git push -u origin master
+  401  ls
+  402  cd week01
+  403  ls
+  404  cat ex2.txt
+  405  cat ex2.sh
+  406  cut --help
+  407  cat ex2.txt | cut -c 8- > ex2.sh
+  408  cat ex2.sh
+  409  cat ex2.txt
+  410  history | tail -25 > ~/week01/ex2.txt
