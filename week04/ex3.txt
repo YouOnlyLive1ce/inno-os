@@ -1,0 +1,4 @@
+When passing argument 3 to program, it will cause calling fork in loop with "wave" effect. 
+Every child proccess will be forked, and amount of running proccesses will be 2^n. 
+At the end it may cause system crush, because proccess manager will wait for a lot of proccesses
+which are sleeping. 
