@@ -43,12 +43,9 @@ int main(void){
     int dot_product=0;
     pFile = fopen("temp.txt","r");
     for (int i=0;i<n;i++){
-        //got bug right here. When n=2, if i try to run program, it ouputs random answer
-        //If try to debug, it will always output right answer. Work/Not work randomly.
         fscanf(pFile,"%d^\n",&sum);
         dot_product+=sum;
     }
     printf("%d",dot_product);
     return 0;
 }
-
