@@ -1,0 +1,10 @@
+Unnamed pipes may be used by parent-child in one program
+Named pipes may be used by different programs
+Probably, complex programs use fifo communication a lot. In almost every
+application folder there is tmp folder for inner communication.
+
+Why Multiple Named Pipes?
+   - Multiple named pipes are created to allow one-to-many 
+     communication between the publisher and subscribers.
+   - Each named pipe represents a separate communication 
+     channel between the publisher and a specific subscriber.

@@ -1,0 +1,4 @@
+The larger amount of threads, 
+the higher the perfomance and the lower real execution time.
+When amount of threads reaches amount of physical proccessor cores, 
+perfomance (user time) became lower.

@@ -1,0 +1,4 @@
+As more threads are added, the program's performance improves 
+initially due to parallelism in prime checking. However, once the 
+number of threads matches or exceeds the available physical processor 
+cores, performance may decline due to increased context switching overhead
