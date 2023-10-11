@@ -1,4 +1,3 @@
-As more threads are added, the program's performance improves 
-initially due to parallelism in prime checking. However, once the 
-number of threads matches or exceeds the available physical processor 
-cores, performance may decline due to increased context switching overhead
+Perfomance became a little better when number of threads grows. Threads are
+count primes one after another, and executes in parallel when is_prime is working.
+But when amount of threads become larger than physical cores, perfomance is downgrading.

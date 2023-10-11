@@ -24,9 +24,8 @@ void *routine(void *arg) {
     return NULL;
 }
 
-int main() {
-    int n;
-    scanf("%d", &n);
+int main(int argc, char *argv[]) {
+    int n=atoi(argv[1]);
     struct Thread *threads[n];
 
     for (int i = 0; i < n; i++) {

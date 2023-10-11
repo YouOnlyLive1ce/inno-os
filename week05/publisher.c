@@ -10,12 +10,12 @@
 #include <string.h>
 #define MESSAGE_SIZE 1024
 
-int main(){
-    int n;
-    fscanf(stdin, "%d",&n);
+int main(int argc, char* argv[]){
+    int n=atoi(argv[1]);
     char message[MESSAGE_SIZE];
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    // int c;
+    // while ((c = getchar()) != '\n' && c != EOF);
+    printf("publisher message: ");
     fgets(message,MESSAGE_SIZE,stdin);
     pid_t parent=getpid();
     pid_t arrProccesses[n]; //i->pid

@@ -8,9 +8,8 @@
 #include <string.h>
 #define MESSAGE_SIZE 1024
 
-int main(){
-    int id;
-    fscanf(stdin, "%d",&id);
+int main(int argc, char* argv[]){
+    int id=atoi(argv[1]);
     char id_str[4];
     //open previously created pipe
     char directory[64]="/tmp/ex1/s";
@@ -25,6 +24,6 @@ int main(){
     char message[MESSAGE_SIZE];
     if (read(fd_read,message,MESSAGE_SIZE)==-1)
         return 2;
-    printf("%s",message);
+    printf("subscriber %d got message: %s",id, message);
     close(fd_read);
 }

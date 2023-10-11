@@ -14,7 +14,6 @@ bool is_prime(int n) {
 }
 // The mutex
 pthread_mutex_t global_lock = PTHREAD_MUTEX_INITIALIZER;
-
 // Do not modify these variables directly , use the functions
 // on the right side.
 int k = 0; //next number
@@ -44,6 +43,8 @@ void *check_primes(void *arg)
         pthread_mutex_lock(&global_lock);
         num_to_check = get_number_to_check();
         pthread_mutex_unlock(&global_lock);
+        if (num_to_check>=n)
+            break;
         if (is_prime(num_to_check)) {
             pthread_mutex_lock(&global_lock);
             increment_primes();
@@ -54,8 +55,8 @@ void *check_primes(void *arg)
 
 int main(int argc, char *argv[])
 {
-    n = 10;
-    int m = 2;
+    n = atoi(argv[1]);
+    int m =atoi(argv[2]);
 
     pthread_t *threads = malloc(m * sizeof(pthread_t));
     for (int i = 0; i < m; i++){

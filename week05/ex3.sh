@@ -1,3 +1,4 @@
+#!/bin/bash
 gcc  -pthread ex3.c -o ex3
 
 printf "m = 1:\n" >> ex3_res.txt
