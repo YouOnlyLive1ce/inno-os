@@ -1,0 +1,6 @@
+best_fit: 0.522763, throughput 0.000105
+worst_fit: 0.434927, throughput 0.000126
+first_fit: 0.184753, throughput 0.000298
+
+first_fit is fastest since it only cares about current task. Best fit is better
+in memory utilization, rather than time perfomance. Again, we see time-space tradeoff.
