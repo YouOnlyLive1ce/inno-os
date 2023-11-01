@@ -1,0 +1,5 @@
+Memory consuption increases every second by 1024MB. 
+The 'si' and 'so' fields will show the amount of memory swapped 
+in and out from disk, which might not be impacted significantly 
+in given scenario unless the system runs out of physical memory 
+and requires swapping to disk (when allocating 1024MB per sec for 16gb ram).
