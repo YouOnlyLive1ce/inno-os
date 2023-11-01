@@ -26,9 +26,18 @@ struct PTE {
 struct PTE *pagetable; 
 pid_t pager_pid;
 
-// Function declarations
-void print_pagetable(int num_pages);
-void signal_handler(int signum);
+void print_pagetable(int num_pages) {
+    for (int j = 0; j < num_pages; j++) {
+        printf("Page %d ---> valid=%d, frame=%d, dirty=%d, referenced=%d\n",
+            j, pagetable[j].valid, pagetable[j].frame, pagetable[j].dirty, pagetable[j].referenced);
+    }
+    printf("--------------------------\n");
+}
+
+void signal_handler(int signum) {
+    if (signum == SIGCONT) 
+        return; // No action needed for SIGCONT signal
+}
 
 int main(int argc, char *argv[]) {
     signal(SIGCONT, signal_handler);
@@ -44,8 +53,6 @@ int main(int argc, char *argv[]) {
     // Map the pagetable to a file
     int file_write = open("/tmp/ex2/pagetable", O_RDWR);
     pagetable = mmap(NULL, sizeof(struct PTE) * P, PROT_WRITE | PROT_READ, MAP_SHARED, file_write, 0);
-    printf("--------------------------\nInitialized page table\n");
-    print_pagetable(P);
 
     int i = 0;
     while (i < strlen(memory_accesses)) {
@@ -83,15 +90,4 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void print_pagetable(int num_pages) {
-    for (int j = 0; j < num_pages; j++) {
-        printf("Page %d ---> valid=%d, frame=%d, dirty=%d, referenced=%d\n",
-            j, pagetable[j].valid, pagetable[j].frame, pagetable[j].dirty, pagetable[j].referenced);
-    }
-    printf("--------------------------\n");
-}
 
-void signal_handler(int signum) {
-    if (signum == SIGCONT) 
-        return; // No action needed for SIGCONT signal
-}
