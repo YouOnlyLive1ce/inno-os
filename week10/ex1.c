@@ -31,17 +31,16 @@ void find_all_hlinks(const char *source) {
 
     printf("Hard links for file %s with inode %lu:\n", source, (unsigned long)source_stat.st_ino);
 
-    DIR *dir;
-    struct dirent *entry;
+    DIR *directory;
+    struct dirent *directory_entry;
 
-    dir = opendir(path);
+    directory = opendir(path);
 
-    while ((entry = readdir(dir)) != NULL) {
+    while ((directory_entry = readdir(directory)) != NULL) {
         char file_path[PATH_LENGTH];
-        snprintf(file_path, sizeof(file_path), "%s/%s", path, entry->d_name);
+        snprintf(file_path, sizeof(file_path), "%s/%s", path, directory_entry->d_name);
 
         struct stat st;
-
         stat(file_path, &st);
 
         if (S_ISREG(st.st_mode) && st.st_ino == source_stat.st_ino && strcmp(file_path, source) != 0) {
@@ -51,25 +50,24 @@ void find_all_hlinks(const char *source) {
         }
     }
 
-    closedir(dir);
+    closedir(directory);
 }
 
 void unlink_all(const char *source) {
+    //unlink all hard links of a given file except the source itself
     struct stat source_stat;
-
     stat(source, &source_stat);
 
-    DIR *dir;
-    struct dirent *entry;
+    DIR *directory;
+    struct dirent *directory_entry;
 
-    dir = opendir(path);
+    directory = opendir(path);
 
-    while ((entry = readdir(dir)) != NULL) {
+    while ((directory_entry = readdir(directory)) != NULL) {
         char file_path[PATH_LENGTH];
-        snprintf(file_path, sizeof(file_path), "%s/%s", path, entry->d_name);
+        snprintf(file_path, sizeof(file_path), "%s/%s", path, directory_entry->d_name);
 
         struct stat st;
-
         if (lstat(file_path, &st) == 0) {
             if (S_ISREG(st.st_mode) && st.st_ino == source_stat.st_ino && strcmp(file_path, source) != 0) {
                 unlink(file_path);
@@ -77,8 +75,7 @@ void unlink_all(const char *source) {
             }
         }
     }
-
-    closedir(dir);
+    closedir(directory);
 }
 
 
@@ -87,12 +84,11 @@ void create_sym_link(const char *source, const char *link) {
 }
 
 int main(int argc, char *argv[]) {
-    
+    // Check if the correct number of command-line arguments is provided
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
-
     path = argv[1];
 
     char source[PATH_LENGTH];
@@ -118,18 +114,21 @@ int main(int argc, char *argv[]) {
 
         find_all_hlinks(source);
 
+        // Rename the source file
         char new_path[PATH_LENGTH];
         snprintf(new_path, sizeof(new_path), "/tmp/myfile1.txt");
         rename(source, new_path);
         sleep(1);
 
+        // Modify the content of one hard link
         FILE *file11= fopen(link1, "w");
         if (file11!=NULL) {
             fprintf(file11, "Modified content of myfile11.txt");
             fclose(file11);
             sleep(1);
         }
-
+        
+        // Create a symbolic link and modify the content of the target file
         char link3[PATH_LENGTH];
         snprintf(link3, sizeof(link3), "%s/myfile13.txt", path);
         create_sym_link("/tmp/myfile1.txt", link3);

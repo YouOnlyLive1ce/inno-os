@@ -18,36 +18,36 @@ void print_stat_info(const char *path) {
     struct stat stat_info;
     if (stat(path, &stat_info) == 0) {
         printf("Stat info for %s:\n", path);
-        printf("  Size: %ld bytes\n", stat_info.st_size);
-        printf("  Permissions: %o\n", stat_info.st_mode & (S_IRWXO | S_IRWXG | S_IRWXU));
-        printf("  Last access time: %s", ctime(&stat_info.st_atime));
-        printf("  Last modification time: %s\n", ctime(&stat_info.st_mtime));
+        printf("Size: %ld bytes\n", stat_info.st_size);
+        printf("Permissions: %o\n", stat_info.st_mode & (S_IRWXO | S_IRWXG | S_IRWXU));
+        printf("Last access time: %s", ctime(&stat_info.st_atime));
+        printf("Last modification time: %s\n", ctime(&stat_info.st_mtime));
     }
     fflush(stdout);
 }
 
-void print_all_entries_stat(const char *path) {
+void print_all_stat_info(const char *path) {
     DIR *direrctory = opendir(path);
     if (direrctory==NULL) {
         perror("Error opening directory");
         return;
     }
-
-    struct dirent *entry;
-    while ((entry = readdir(direrctory)) != NULL) {
-        if (entry->d_name[0] != '.') { //So that it will not output unnecessary files
+    struct dirent *directory_entry;
+    while ((directory_entry = readdir(direrctory)) != NULL) {
+        if (directory_entry->d_name[0] != '.') { //So that it will not output unnecessary files
             char full_path[PATH_LENGTH];
-            snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
+            snprintf(full_path, sizeof(full_path), "%s/%s", path, directory_entry->d_name);
             print_stat_info(full_path);
         }
     }
     closedir(direrctory);
 }
 
+// Signal handler for handling SIGINT
 void signal_handler(int signum) {
     if (signum == SIGINT) {
         printf("\nReceived SIGINT. Printing stat info before termination:\n");
-        print_all_entries_stat(path);
+        print_all_stat_info(path);
         exit(0);
     }
 }
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
     signal(SIGINT, signal_handler);
     printf("Printing stat info on startup:\n");
-    print_all_entries_stat(path);
+    print_all_stat_info(path);
 
     int inotify_fd = inotify_init();
     int watch_fd = inotify_add_watch(inotify_fd, path, IN_ALL_EVENTS);
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         num_bytes = read(inotify_fd, buffer, BUFFER_LENGTH);
         struct inotify_event *event = (struct inotify_event *)buffer;
 
-        if (event->name != NULL && event->len > 0) {//So it will not work with unnecessary files
+        if (event->name != NULL && event->len > 0) {// Exclude events with no relevant file name
             char full_path[PATH_LENGTH];
             snprintf(full_path, sizeof(full_path), "%s/%s", path, event->name);
             switch (event->mask) {
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
                     printf("%s was opened\n", event->name);
                     break;
                 default:
-                    printf("Error, event has no matches");
+                    continue;
             }
             fflush(stdout);
             print_stat_info(full_path);
