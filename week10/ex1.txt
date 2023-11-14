@@ -1,0 +1,5 @@
+The monitor.c program detected an event for myfile11.txt, as it is situated in the directory monitored by the program.
+
+Conversely, there was no event reported by the monitor.c program for myfile13.txt. This is due to the fact that alterations made to the original file (/tmp/myfile1.txt) do not impact the symbolic link (myfile13.txt). Unlike hard links, myfile13.txt merely points to the file's path without sharing its inode.
+
+The number of hard links is one, achieved by invoking the unlink_all function, which deletes all hard links associated with the same inode. Nonetheless, myfile13.txt persists as a symbolic link.
