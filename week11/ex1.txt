@@ -1,0 +1,21 @@
+lib64
+.
+file1
+ex1
+file2
+lib
+..
+bin
+lib64
+.
+file1
+ex1
+file2
+lib
+..
+bin
+In both execution instances, a distinction arises primarily due to the alteration of the root directory in the first run. The initial run involves a modification of the process's root directory to the mount point of the Loop File System (LOFS). This action establishes an isolated environment characterized by a constrained set of files and directories within the LOFS.
+
+Conversely, the second run takes place without any adjustment to the root directory, allowing the program to execute within the unaltered system environment. In this scenario, additional system directories such as /home, /proc, and /sys are present, augmenting the overall file structure. Despite this divergence in the file system view, the shared libraries utilized by the program persistently originate from the LOFS.
+
+This distinction underscores the impact of changing the root directory using the chroot command, illustrating its capacity to segregate the execution environment and influence the perceptible file system layout.
