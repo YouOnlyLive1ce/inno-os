@@ -1,0 +1,76 @@
+Thread 1 created
+Thread 2 created
+Thread 3 created
+Thread 1 tries to lock Mutex 2
+Thread 1 locked Mutex 2
+Thread 1 sleeping for 3 seconds
+Thread 1 unlocked Mutex 2
+Thread 3 tries to lock Mutex 0
+Thread 3 locked Mutex 0
+Thread 3 sleeping for 1 seconds
+Thread 3 unlocked Mutex 0
+Thread 1 tries to lock Mutex 0
+Thread 1 locked Mutex 0
+Thread 1 sleeping for 2 seconds
+Thread 1 unlocked Mutex 0
+Thread 3 tries to lock Mutex 2
+Thread 3 locked Mutex 2
+Thread 3 sleeping for 0 seconds
+Thread 3 unlocked Mutex 2
+Thread 1 tries to lock Mutex 1
+Thread 1 locked Mutex 1
+Thread 1 sleeping for 3 seconds
+Thread 1 unlocked Mutex 1
+Thread 3 tries to lock Mutex 1
+Thread 3 locked Mutex 1
+Thread 3 sleeping for 0 seconds
+Thread 3 unlocked Mutex 1
+Thread 1 tries to lock Mutex 2
+Thread 1 locked Mutex 2
+Thread 1 sleeping for 1 seconds
+Thread 1 unlocked Mutex 2
+Thread 3 tries to lock Mutex 0
+Thread 3 locked Mutex 0
+Thread 3 sleeping for 2 seconds
+Thread 3 unlocked Mutex 0
+Thread 1 tries to lock Mutex 0
+Thread 1 locked Mutex 0
+Thread 1 sleeping for 4 seconds
+Thread 1 unlocked Mutex 0
+Thread 3 tries to lock Mutex 2
+Thread 3 locked Mutex 2
+Thread 3 sleeping for 1 seconds
+Thread 3 unlocked Mutex 2
+Thread 1 tries to lock Mutex 1
+Thread 1 locked Mutex 1
+Thread 1 sleeping for 2 seconds
+Thread 1 unlocked Mutex 1
+Thread 3 tries to lock Mutex 1
+Thread 3 locked Mutex 1
+Thread 3 sleeping for 2 seconds
+Thread 3 unlocked Mutex 1
+Thread 1 tries to lock Mutex 2
+Thread 1 locked Mutex 2
+Thread 1 sleeping for 0 seconds
+Thread 1 unlocked Mutex 2
+Thread 3 tries to lock Mutex 0
+Thread 3 locked Mutex 0
+Thread 3 sleeping for 4 seconds
+Thread 3 unlocked Mutex 0
+Thread 1 tries to lock Mutex 0
+Thread 1 locked Mutex 0
+Thread 1 sleeping for 3 seconds
+Thread 1 unlocked Mutex 0
+Thread 3 tries to lock Mutex 2
+Thread 3 locked Mutex 2
+Thread 3 sleeping for 1 seconds
+Thread 3 unlocked Mutex 2
+Thread 1 tries to lock Mutex 1
+Thread 1 locked Mutex 1
+Thread 1 sleeping for 0 seconds
+Thread 1 unlocked Mutex 1
+Thread 3 tries to lock Mutex 1
+Thread 3 locked Mutex 1
+Thread 3 sleeping for 1 seconds
+Thread 3 unlocked Mutex 1
+No deadlocks detected.
